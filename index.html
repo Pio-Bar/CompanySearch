@@ -13,7 +13,17 @@
     <input type="text" id="companyInput" placeholder="..." />
     <span>Error message!</span>
     <button id="searchBtn">Search</button>
-    <button id='download' href="#">Download customer list.</button>
+    <button id="download" href="#">Download customer list.</button>
+    <label for="phoneInput">Enter a phone number!</label>
+    <input
+      type="tel"
+      id="phoneInput"
+      pattern="[+][\d]{2}-[\d]{3}-[\d]{3}-[\d]{3}"
+      placeholder="+xx-xxx-xxx-xxx"
+      required
+    />
+    <span class='hidden' id="error">Error message!</span>
+    <button id="validateBtn">Validate</button>
     <table id="results">
       <tr>
         <th>Company Name</th>
