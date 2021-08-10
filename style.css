@@ -1,14 +1,88 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: #323031;
 }
-.hidden{
-    display: none;
+
+.container {
+  width: 90vw;
+  margin: auto;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.valid{
-    color: green;
+
+.section {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
 }
-.invalid{
-    color: red;
+
+input {
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 1.2em;
+}
+
+label {
+  font-size: 1.2em;
+}
+
+button {
+  background-color: #c1dff0;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  margin: 1em 0;
+  padding: 1em;
+}
+button:hover {
+  background-color: #88ccf1;
+}
+
+table {
+  width: 100%;
+}
+tr {
+  border-bottom: 1px solid #323031;
+  width: 100%;
+}
+
+th {
+  font-size: 1.2em;
+}
+th,
+td {
+  padding: 0.5em;
+  width: 25%;
+}
+
+.hidden {
+  display: none;
+}
+.valid {
+  color: #3e885b;
+}
+.invalid {
+  color: #dc493a;
+}
+
+@media (max-width: 750px) {
+  tr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  td {
+    text-align: center;
+    width: 100%;
+  }
 }

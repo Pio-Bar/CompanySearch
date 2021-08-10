@@ -4,19 +4,22 @@ const validateBtn = document.getElementById("validateBtn");
 const searchBtn = document.getElementById("searchBtn");
 const downloadBtn = document.getElementById("download");
 const resultsTable = document.getElementById("results");
-const errorMsg = document.getElementById("error")
+const errorMsg = document.getElementById("error");
 
 let companies = [];
 let customers = [];
 
 //Fetch data and save as a variable.
-fetch("./companies.json")
-  .then((res) => res.json())
-  .then((data) => (companies = data));
-
-fetch("./customers.json")
-  .then((res) => res.json())
-  .then((data) => (customers = data));
+const getData = async () => {
+  const companiesResponse = await fetch("./companies.json");
+  const companiesData = await companiesResponse.json();
+  companies = companiesData;
+  const customersResponse = await fetch("./customers.json");
+  const customersData = await customersResponse.json();
+  customers = customersData;
+  console.log('app ready!');
+};
+getData()
 
 //Returns an array with company names matching the query.
 function search(objects, query) {
@@ -72,11 +75,11 @@ function showError(bool, element, name) {
   if (bool) {
     element.classList.replace("hidden", "valid");
     element.classList.replace("invalid", "valid");
-    element.innerText = `This ${name} is valid!`
+    element.innerText = `This ${name} is valid!`;
   } else {
     element.classList.replace("hidden", "invalid");
     element.classList.replace("valid", "invalid");
-    element.innerText = `Please, enter a proper ${name}!`
+    element.innerText = `Please, enter a proper ${name}!`;
   }
 }
 
@@ -94,7 +97,7 @@ downloadBtn.addEventListener("click", () => {
 });
 
 validateBtn.addEventListener("click", () => {
-  showError(phoneInput.checkValidity(), errorMsg, 'phone number')
+  showError(phoneInput.checkValidity(), errorMsg, "phone number");
   if (phoneInput.checkValidity()) {
     console.log("valid");
   } else {

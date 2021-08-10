@@ -8,29 +8,36 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>Hello World</h1>
-    <label for="companyName">Enter a company name:</label>
-    <input type="text" id="companyInput" placeholder="..." />
-    <span>Error message!</span>
-    <button id="searchBtn">Search</button>
-    <button id="download" href="#">Download customer list.</button>
-    <label for="phoneInput">Enter a phone number!</label>
-    <input
-      type="tel"
-      id="phoneInput"
-      pattern="[+][\d]{2}-[\d]{3}-[\d]{3}-[\d]{3}"
-      placeholder="+xx-xxx-xxx-xxx"
-      required
-    />
-    <span class='hidden' id="error">Error message!</span>
-    <button id="validateBtn">Validate</button>
-    <table id="results">
-      <tr>
-        <th>Company Name</th>
-        <th>Company Code</th>
-        <th>Company Domain</th>
-      </tr>
-    </table>
+    <div class="container">
+      <h1>Company Search</h1>
+      <div class="section">
+        <label for="companyName">Enter a company name:</label>
+        <input type="text" id="companyInput" placeholder="..." />
+        <button id="searchBtn">Search</button>
+      </div>
+      <div class="section">
+        <label for="phoneInput">Enter a phone number!</label>
+        <input
+          type="tel"
+          id="phoneInput"
+          pattern="[+][\d]{2}-[\d]{3}-[\d]{3}-[\d]{3}"
+          placeholder="+xx-xxx-xxx-xxx"
+          required
+        />
+        <span class="hidden" id="error">Error message!</span>
+        <button id="validateBtn">Validate</button>
+      </div>
+      <div class="section">
+        <button id="download" href="#">Download customer list.</button>
+      </div>
+      <table id="results">
+        <tr>
+          <th>Company Name</th>
+          <th>Company Code</th>
+          <th>Company Domain</th>
+        </tr>
+      </table>
+    </div>
     <script src="./app.js"></script>
   </body>
 </html>
