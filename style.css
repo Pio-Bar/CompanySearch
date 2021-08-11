@@ -15,6 +15,9 @@
   flex-direction: column;
   align-items: center;
 }
+h1 {
+  margin: 1rem;
+}
 
 .section {
   width: 100%;
@@ -49,13 +52,12 @@ button:hover {
 }
 
 table {
+  border-collapse: collapse;
   width: 100%;
 }
 tr {
-  border-bottom: 1px solid #323031;
   width: 100%;
 }
-
 th {
   font-size: 1.2em;
 }
@@ -63,6 +65,7 @@ th,
 td {
   padding: 0.5em;
   width: 25%;
+  border-bottom: 0.5px solid #323031;
 }
 
 .hidden {
@@ -76,13 +79,20 @@ td {
 }
 
 @media (max-width: 750px) {
-  tr {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   td {
     text-align: center;
     width: 100%;
+  }
+  td:nth-child(2),
+  td:nth-child(3),
+  th:nth-child(2),
+  th:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  h1{
+    font-size: 1.5em;
   }
 }

@@ -15,7 +15,7 @@ const getData = async () => {
   companies = await companiesResponse.json();
   const customersResponse = await fetch("./customers.json");
   customers = await customersResponse.json();
-  console.log("app ready!");
+  alert("app ready!");
 };
 getData();
 
