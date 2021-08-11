@@ -10,14 +10,18 @@ let companies = [];
 let customers = [];
 
 //Fetch data and save as a variable.
-const getData = async () => {
-  const companiesResponse = await fetch("./companies.json");
-  companies = await companiesResponse.json();
-  const customersResponse = await fetch("./customers.json");
-  customers = await customersResponse.json();
-  alert("app ready!");
+const getCompaniesData = async () => {
+  const response = await fetch("./companies.json");
+  companies = await response.json();
 };
-getData();
+const getCustomersData = async () => {
+  const response = await fetch("./customers.json");
+  customers = await response.json();
+};
+
+Promise.all([getCompaniesData(), getCustomersData()]).then(() =>
+  alert("app ready!")
+);
 
 //Returns an array with company names matching the query.
 function search(objects, query) {
@@ -42,23 +46,22 @@ function clearTable(table) {
 }
 
 //Expands customer object with his proper company.
-function addCompanyToCustomer(customers, companies) {
-  let result = [];
-  for (customer of customers) {
-    for (company of companies) {
-      if (customer.companyCode === company.code) {
-        customer.company = company;
-        result.push(customer);
-      }
-    }
-  }
-  return result;
+function createCustomersWithAssignedCompany(customers, companies) {
+  return customers.map((customer) => {
+    const company = companies.find(
+      (company) => customer.companyCode === company.code
+    );
+    return {
+      ...customer,
+      company,
+    };
+  });
 }
 
 //Download array as a JSON file
 function downloadCustomers(content) {
   const a = document.createElement("a");
-  let file = new Blob([JSON.stringify(content)], { type: "text/plain" });
+  const file = new Blob([JSON.stringify(content)], { type: "text/plain" });
   a.href = URL.createObjectURL(file);
   a.download = "customers.json";
   a.click();
@@ -70,23 +73,23 @@ function showError(bool, element, name) {
     element.classList.replace("hidden", "valid");
     element.classList.replace("invalid", "valid");
     element.innerText = `This ${name} is valid!`;
-  } else {
-    element.classList.replace("hidden", "invalid");
-    element.classList.replace("valid", "invalid");
-    element.innerText = `Please, enter a proper ${name}!`;
+    return;
   }
+  element.classList.replace("hidden", "invalid");
+  element.classList.replace("valid", "invalid");
+  element.innerText = `Please, enter a proper ${name}!`;
 }
 
 searchBtn.addEventListener("click", () => {
   clearTable(resultsTable);
-  let foundCompanies = search(companies, companyInput.value);
+  const foundCompanies = search(companies, companyInput.value);
   foundCompanies.forEach((company) => {
     displayCompany(company, resultsTable);
   });
 });
 
 downloadBtn.addEventListener("click", () => {
-  let newCustomers = addCompanyToCustomer(customers, companies);
+  const newCustomers = createCustomersWithAssignedCompany(customers, companies);
   downloadCustomers(newCustomers);
 });
 
