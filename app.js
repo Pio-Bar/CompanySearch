@@ -12,24 +12,18 @@ let customers = [];
 //Fetch data and save as a variable.
 const getData = async () => {
   const companiesResponse = await fetch("./companies.json");
-  const companiesData = await companiesResponse.json();
-  companies = companiesData;
+  companies = await companiesResponse.json();
   const customersResponse = await fetch("./customers.json");
-  const customersData = await customersResponse.json();
-  customers = customersData;
-  console.log('app ready!');
+  customers = await customersResponse.json();
+  console.log("app ready!");
 };
-getData()
+getData();
 
 //Returns an array with company names matching the query.
 function search(objects, query) {
-  let result = [];
-  for (let obj of objects) {
-    if (obj.name.toLowerCase().includes(query.toLowerCase())) {
-      result.push(obj);
-    }
-  }
-  return result;
+  return objects.filter((object) =>
+    object.name.toLowerCase().includes(query.toLowerCase())
+  );
 }
 
 //Adds a row to the table with company details.
@@ -86,9 +80,9 @@ function showError(bool, element, name) {
 searchBtn.addEventListener("click", () => {
   clearTable(resultsTable);
   let foundCompanies = search(companies, companyInput.value);
-  for (company of foundCompanies) {
+  foundCompanies.forEach((company) => {
     displayCompany(company, resultsTable);
-  }
+  });
 });
 
 downloadBtn.addEventListener("click", () => {
@@ -98,9 +92,4 @@ downloadBtn.addEventListener("click", () => {
 
 validateBtn.addEventListener("click", () => {
   showError(phoneInput.checkValidity(), errorMsg, "phone number");
-  if (phoneInput.checkValidity()) {
-    console.log("valid");
-  } else {
-    console.log("invalid");
-  }
 });
